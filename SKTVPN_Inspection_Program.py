@@ -42,8 +42,13 @@ for filenum in range(0,8):
     
     for namecheck in range(0,8):
         if namesplit[0] == gw_name[namecheck]:
-            os.rename("%s" %loglist[filenum],"%s.txt" %namesplit[0])
-            print("Filename %s -> %s.txt" %(loglist[filenum],namesplit[0]))
+            if os.path.exists("%s\%s.txt" %(str(nextdir),namesplit[0])) == True:
+                if loglist[filenum] != "%s.txt" %namesplit[0]:
+                    os.remove("%s\%s" %(str(nextdir),loglist[filenum]))
+                    print("####### remove %s(%s) #######" %(hostname, loglist[filenum]))
+            else:
+                os.rename("%s" %loglist[filenum],"%s.txt" %namesplit[0])
+                print("Filename %s -> %s.txt" %(loglist[filenum],namesplit[0]))
         else:
             pass
 
